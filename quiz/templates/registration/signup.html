@@ -1,0 +1,53 @@
+
+
+{%extends 'index.html'%}
+{% block title %}
+  Sign Up
+{% endblock %}
+{% block content %}
+<div class='container py-5'>
+  <form method="post" action="{% url 'users:signup' %}">
+    {% csrf_token %}
+    <p>
+    <label >Username:</label>
+    <input placeholder="username" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+    </p>
+    <p>
+    <label for='id_password1'>Password:</label>
+    <input placeholder="password" type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+    </p>
+    <p>
+    <div pseudo="-webkit-textfield-decoration-container"><div><div pseudo="-webkit-caps-lock-indicator" style="display: none !important;"></div></div>
+    <label >confirm it </label>
+    <input placeholder="password again" type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+    </p>
+    <div pseudo="-webkit-textfield-decoration-container"><div></div><div pseudo="-webkit-caps-lock-indicator" style="display: none !important;"></div></div>
+    <br>
+      {% if form.errors %}
+        {% for field in form %}
+          {% for error in field.errors %}            
+            <div class="alert alert-danger">
+              {{ error|escape }}
+            </div>
+          {% endfor %}
+        {% endfor %}
+        
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    
+    <input type="submit"  class="btn btn-primary" value="Sign up">
+    
+  </form>
+
+{% endblock %}
+
+
+
+
+
+
+        

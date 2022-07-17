@@ -1,0 +1,29 @@
+{%extends 'index.html'%}
+{% block title %}
+              Top-10
+      {% endblock %}
+{%block content%}
+
+<div class="container py-2">
+
+<table class="table table-striped">
+      <thead>
+
+          <tr >
+            <th>nickname</th>
+            <th>score</th>
+            </tr>
+      </thead>
+      <tbody>{%for user in users%}
+          <tr>
+            
+              <td>{{user.user.username}} </td>
+              <td>{{user.score}}</td>
+              {%endfor%}
+          </tr>
+      </tbody>
+  </table>
+
+</div>
+
+{%endblock%}

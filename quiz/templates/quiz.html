@@ -1,0 +1,40 @@
+
+{%extends 'index.html'%}
+
+{%block content%}
+<div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+            Score: {{score}}
+        </div>
+        <div class="card-body">
+          <p>
+            <form method="post" action="{% url 'app:quiz' %}">
+                {% csrf_token %}
+                {%for result in results%}
+                    {{result.question|safe}} 
+                    <br><br>
+                <input type="hidden" name="category" value="{{result.category}}">
+                <input type="hidden" name="question" value="{{result.question}}">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  
+                    <input class="btn btn-{%if correct_answer == 'True' %}success{%else%}secondary{%endif%}" type="{%if is_answered%}button{%else%}submit{%endif%}" name="user_answer" value="True"> 
+                 
+                    <a class="btn btn-secondary" href="{%url 'app:quiz'%}" role="button">next</a>
+      
+                    <input class="btn btn-{%if correct_answer == 'False' %}danger{%else%}secondary{%endif%}" type="{%if is_answered%}button{%else%}submit{%endif%}" name="user_answer" value="False"> 
+                  
+                </div>
+                {%endfor%}
+
+
+                
+                </form> 
+          </p>
+        </div> <!-- card body -->
+      </div> <!-- card -->
+    </div> <!-- col -->
+  </div> <!-- row -->
+{% endblock %}
