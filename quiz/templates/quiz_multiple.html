@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="row justify-content-center">
+  <div class="col-md-8 p-5">
+    <div class="card">
+      <div class="card-header">
+        Score: {{score.score}}
+      </div>
+      <div class="card-body">
+        <p>
+          <form method="post" action="{% url 'app:quiz_multiple' %}">
+            {% csrf_token %}
+            {%for result in results%}
+              <input type="hidden" name="question" value="{{result.question}}">
+              {{result.question|safe}} 
+            {%endfor%}
+              <br><br>
+              {%for answer in answers%}
+                <p><input type="radio" class="button" required name="user_answer" value="{{answer}}">{{answer|safe}}</p>
+              {%endfor%}
+              {{correct_answer|safe}}<br>
+              {%if is_post %}{%if is_answered %} <a class="btn btn-success" href="{%url 'app:quiz_multiple'%}" role="button">next</a> {%else%}<a class="btn btn-danger" href="{%url 'app:quiz_multiple'%}" role="button">next</a>{%endif%}{%else%} <input class="btn btn-secondary" type="submit"  value="Send">{%endif%}
+            
+          </form> 
+        </p>
+      </div> <!-- card body -->
+    </div> <!-- card -->
+  </div> <!-- col -->
+</div> <!-- row -->
+{% endblock %}

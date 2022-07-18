@@ -5,9 +5,11 @@
      <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
      <span style="color:red">Q</span>uiz
    </a>
+   {% with request.resolver_match.view_name as view_name %}
    {% if user.is_authenticated %}
-    <div class="bg text-dark">{{ user.username }}:{{score.score}}</div>
+    <div class="bg text-dark">{{ user.username }}{% if view_name  == 'users:login' or view_name  == 'users:signup'  %}{%else%}:{{score.score}}{%endif%}</div>
    {%endif%}
+   {% endwith %}
    {% with request.resolver_match.view_name as view_name %}
    <ul class="nav nav-pills">
     <li class="nav-item"> 

@@ -1,47 +1,51 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>   
-  {% load static %} 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{% static 'img/fav/favicon.ico' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
-    <title>
-      {% block title %}
-              Quiz
-      {% endblock %}
-    </title>
-  </head>
+{%extends 'base.html'%}
+{% block title %}
+        Quiz
+{% endblock %}
 
-  <header>
-    {% include 'includes/header.html' %}
-  </header>
-
-  <body>
-    <main>
-      <center><br><br> 
-      {% block content %}
-        <div class="container py-5">
-          <div class="col-md-8 p-5">
-            <div class="card">
-              <div class="card-header">
-                Rules:<br>
-                Answer questions, earn points and upgrade your status. 
-                <form action={%url 'app:quiz' %}><br><br>
-                  <button  type="submit" class="btn btn-primary">START </button>
-                </form>
+{% block content %}
+  <div class="container py-5">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+         <b> Rules:</b><br>
+          Answer questions, earn points to upgrade your status.
+          <p>
+            <div class="row justify-content-center"> 
+              <div class="col-md-8 p-5"><p><b>Select Type of Questions: </b></p>
+                <div class="card">
+                 +1 point
+                  <div class="card-header">
+                    <i>The Python programming language gets its name from the British comedy group &quot;Monty Python.&quot;</i>
+                  </div>
+                  <a class="btn btn-primary btn-sm" href="{%url 'app:quiz'%}" role="button">True or False</a>
+                </div>
               </div>
             </div>
+          </p>
+          <p>
+            <div class="row justify-content-center"> 
+              <div class="col-md-8 p-5">
+                <div class="card">
+                  +5 points
+                  <div class="card-header ">
+                    <i>Which programming language shares its name with an island in Indonesia?</i>
+                    <div class="w-100 p-3" >
+                      C++<br>
+                      Java<br>
+                      Python<br>
+                      Jakarta<br>
+                      
+                  </div>
+                  </div>
+            <a class="btn btn-primary btn-sm" href="{%url 'app:quiz_multiple'%}" role="button">Multiple Choice</a>
           </div>
         </div>
-      {% endblock %}
-    </center>
-    </main>
-
-  </body>
-</html>
+      </div>
+          </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

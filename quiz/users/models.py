@@ -17,3 +17,8 @@ class Question(models.Model):
     difficulty = models.CharField(blank=True, max_length=100)
     question = models.CharField(blank=True, max_length=500)
     correct_answer = models.CharField(blank=True, max_length=100)
+    incorrect_answers = models.CharField(blank=True, max_length=1000)
+    answer1 = models.CharField(blank=True, max_length=300)
+    answer2 = models.CharField(blank=True, max_length=300)
+    answer3 = models.CharField(blank=True, max_length=300)
+    answer4 = models.CharField(blank=True, max_length=300)
