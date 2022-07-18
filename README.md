@@ -12,13 +12,6 @@
 ```
 pip install -r requirements.txt
 ```
-- в папке с файлом manage.py выполните команды:
-```
-python3 manage.py makemigrations
-```
-```
-python3 manage.py migrate
-```
 - запустить dev-сервер:
 ```
 python3 manage.py runserver
