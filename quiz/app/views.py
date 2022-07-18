@@ -40,8 +40,7 @@ def quiz(request):
             score.save()
         correct_answer = question.correct_answer
         text = question.question
-        question.question = ''
-        question.save()
+        question.delete()
         return render(request, template_name='quiz.html',
                       context={'correct_answer': correct_answer,
                                'results': [{'question': text}],
