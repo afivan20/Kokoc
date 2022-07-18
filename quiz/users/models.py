@@ -9,6 +9,7 @@ class Score(models.Model):
     score = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+
 class Question(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     category = models.CharField(blank=True, max_length=300)

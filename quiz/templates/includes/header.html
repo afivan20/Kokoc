@@ -6,9 +6,13 @@
      <span style="color:red">Q</span>uiz
    </a>
    {% if user.is_authenticated %}
-   <div class="bg text-dark">{{ user.username }}</div>
+    <div class="bg text-dark">{{ user.username }}:{{score.score}}</div>
    {%endif%}
-   {% with request.resolver_match.view_name as view_name %} 
+   {% with request.resolver_match.view_name as view_name %}
+   <ul class="nav nav-pills">
+    <li class="nav-item"> 
+      <a class="nav-link link-light {% if view_name  == 'app:index' %}active{% endif %}" href="{% url 'app:index' %}">Home</a>
+    </li>
    <ul class="nav nav-pills">
     <li class="nav-item"> 
       <a class="nav-link link-light {% if view_name  == 'app:top' %}active{% endif %}" href="{% url 'app:top' %}">Top-10</a>
@@ -30,4 +34,3 @@
    </ul>
  </div>
 </nav> 
-<body>
