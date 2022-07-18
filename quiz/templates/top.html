@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {% block title %}
-    Top-10
+    Top
 {% endblock %}
 {%block content%}
 <div class="container py-2">
@@ -11,13 +11,27 @@
         <th>score</th>
       </tr>
     </thead>
+    
     <tbody>
-      {%for user in users%}
-        <tr>
-          <td>{{user.user.username}} </td>
-          <td>{{user.score}}</td>
+      {%for king in kings%}
+        <tr >
+          <td class="table-dark">{{king.user.username}} </td>
+          <td class="table-dark">{{king.score}}</td>
         </tr>
       {%endfor%}
+      {%for pro in pros%}
+        <tr >
+          <td class="table-danger">{{pro.user.username}} </td>
+          <td class="table-danger">{{pro.score}}</td>
+        </tr>
+        {%endfor%}
+      {%for amateur in amateurs%}
+        <tr >
+          <td class="table-success">{{amateur.user.username}} </td>
+          <td class="table-success">{{amateur.score}}</td>
+        </tr>
+      {%endfor%}
+
     </tbody>
   </table>
 </div>

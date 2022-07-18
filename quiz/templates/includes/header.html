@@ -1,5 +1,5 @@
 {% load static %} 
-<nav class="navbar navbar-light" style="background-color: lightskyblue">
+<nav class="navbar navbar-light" style="background-color:{%if status == 'Amateur'%} #20c997{%elif status == 'PRO'%} #dc3545{%elif status == 'KING'%} #adb5bd{%else%}lightskyblue{%endif%}">
  <div class="container">
    <a class="navbar-brand" href="{% url 'app:index' %}">
      <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -11,13 +11,18 @@
    {%endif%}
    {% endwith %}
    {% with request.resolver_match.view_name as view_name %}
+
    <ul class="nav nav-pills">
     <li class="nav-item"> 
       <a class="nav-link link-light {% if view_name  == 'app:index' %}active{% endif %}" href="{% url 'app:index' %}">Home</a>
     </li>
+    <ul class="nav nav-pills">
+      <li class="nav-item"> 
+        <a class="nav-link link-light {% if view_name  == 'app:upgrade' %}active{% endif %}" href="{% url 'app:upgrade' %}">Upgrade</a>
+      </li>
    <ul class="nav nav-pills">
     <li class="nav-item"> 
-      <a class="nav-link link-light {% if view_name  == 'app:top' %}active{% endif %}" href="{% url 'app:top' %}">Top-10</a>
+      <a class="nav-link link-light {% if view_name  == 'app:top' %}active{% endif %}" href="{% url 'app:top' %}">Dashboard</a>
     </li>
      {% if user.is_authenticated %}
        <li class="nav-item"> 
