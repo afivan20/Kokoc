@@ -9,8 +9,10 @@ class ScoreAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('user', 'question',)
 
+
 class StatusAdmin(admin.ModelAdmin):
     list_display = ('user', 'status',)
+
 
 admin.site.register(Score, ScoreAdmin)
 admin.site.register(Question, QuestionAdmin)

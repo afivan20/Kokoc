@@ -11,6 +11,7 @@ USER_STATUSES = [
     ('KING', 'KING'),
 ]
 
+
 class Score(models.Model):
     score = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -28,6 +29,7 @@ class Question(models.Model):
     answer2 = models.CharField(blank=True, max_length=300)
     answer3 = models.CharField(blank=True, max_length=300)
     answer4 = models.CharField(blank=True, max_length=300)
+
 
 class Status(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

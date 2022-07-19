@@ -10,5 +10,4 @@ urlpatterns = [
     path('quiz_multiple/', quiz_multiple, name='quiz_multiple'),
     path('top/', top, name='top'),
     path('upgrade/', upgrade, name='upgrade'),
-
 ]

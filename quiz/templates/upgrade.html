@@ -12,14 +12,20 @@ Upgrade
                 <div class="col-md-8 p-5"><p><b>{%if KING %}You are the KING!{%else%}Upgrade Your Status:{%endif%} </b>{{text|safe}}<br>
                   <div class="card">
                     Your score: {{score.score}}
-                    
                     <div class="card-header">
                         Your status: {{status}}<br>    
+                    </div>
+                  {% if upgrade%}
+                    <form method="post" action="{% url 'app:upgrade' %}">
+                      {% csrf_token %}
+                    <input class="btn btn-success w-100" type="submit"  value="UPGRADE">
+                  {%endif%}
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
 </div>
-{% if upgrade%}
 
-<form method="post" action="{% url 'app:upgrade' %}">
-    {% csrf_token %}
-<input class="btn btn-success w-100" type="submit"  value="UPGRADE">
-{%endif%}
 {%endblock%}

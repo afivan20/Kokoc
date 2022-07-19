@@ -19,28 +19,21 @@ def index(request):
 
 
 def top(request):
-
-    ####
-    # top_scores = (Score.objects.order_by('-score').values_list('score', flat=True).distinct())
-    # users = Score.objects.order_by('-score').filter(score__in=top_scores[:10])
     kings = Status.objects.filter(status='KING').values('user')
     best_kings = Score.objects.order_by('-score').filter(user__in=kings)[:3]
     pros = Status.objects.filter(status='PRO').values('user')
     best_pros = Score.objects.order_by('-score').filter(user__in=pros)[:3]
     amateurs = Status.objects.filter(status='Amateur').values('user')
     best_amateurs = Score.objects.order_by('-score').filter(user__in=amateurs)[:3]
-    ###
-
     if request.user.is_authenticated:
         if not Status.objects.filter(user=request.user).exists():
             Status.objects.create(user=request.user)
         status = Status.objects.get(user=request.user)
-        users = Score.objects.order_by('-score')[:10]
         if not Score.objects.filter(user=request.user).exists():
             Score.objects.create(user=request.user)
         score = Score.objects.get(user=request.user)
-        return render(request, template_name='top.html', context={'score': score, 'kings': best_kings, 'pros':best_pros, 'amateurs':best_amateurs,'status': status.status})
-    return render(request, template_name='top.html', context={'kings': best_kings, 'pros':best_pros, 'amateurs':best_amateurs})
+        return render(request, template_name='top.html', context={'score': score, 'kings': best_kings, 'pros': best_pros, 'amateurs': best_amateurs, 'status': status.status})
+    return render(request, template_name='top.html', context={'kings': best_kings, 'pros': best_pros, 'amateurs': best_amateurs})
 
 
 @login_required
@@ -194,7 +187,7 @@ def upgrade(request):
             score.save()
             status.save()
             return redirect(reverse_lazy('app:upgrade'))
-    if status.status == 'beginner' and  score.score >= 100:
+    if status.status == 'beginner' and score.score >= 100:
         context = {
             'text': 'you can upgarde to AMATEUR (100 points)',
             'status': status.status,
@@ -202,33 +195,32 @@ def upgrade(request):
             'upgrade': True
             }
         return render(request, template_name='upgrade.html', context=context)
-    if status.status == 'Amateur' and  score.score >= 500:
+    if status.status == 'Amateur' and score.score >= 500:
         context = {
-        'text': 'you can upgarde to PRO (500 points)',
-        'status': status.status,
-        'score': score,
-        'upgrade': True
-        }
+                    'text': 'you can upgarde to PRO (500 points)',
+                    'status': status.status,
+                    'score': score,
+                    'upgrade': True
+                    }
         return render(request, template_name='upgrade.html', context=context)
-    if status.status == 'PRO' and  score.score >= 1000:
+    if status.status == 'PRO' and score.score >= 1000:
         context = {
-        'text': 'you can upgarde to KING (1000 points)',
-        'status': status.status,
-        'score': score,
-        'upgrade': True
-        }
-        
+                    'text': 'you can upgarde to KING (1000 points)',
+                    'status': status.status,
+                    'score': score,
+                    'upgrade': True
+                    }
         return render(request, template_name='upgrade.html', context=context)
     if status.status == 'KING':
-        context={
-        'KING': True,
-        'score': score,
-        'status': status.status,
-                }
+        context = {
+                    'KING': True,
+                    'score': score,
+                    'status': status.status,
+                    }
         return render(request, template_name='upgrade.html', context=context)
-    context={
-        'text': 'not available<br>Amateur - 100 points<br>PRO - 500 points<br>KING - 1000 points',
-        'score': score,
-        'status': status.status,
-    }
+    context = {
+                'text': 'not available<br>Amateur - 100 points<br>PRO - 500 points<br>KING - 1000 points',
+                'score': score,
+                'status': status.status,
+                }
     return render(request, template_name='upgrade.html', context=context)
